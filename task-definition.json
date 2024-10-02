@@ -6,7 +6,7 @@
       "name": "mycontainer5",
       "image": "216989107004.dkr.ecr.ap-south-1.amazonaws.com/devops/ecs-project:latest",
       "essential": true,
-      "memory": 512,
+      "memory": 1024,
       "cpu": 256,
       "portMappings": [
         {
@@ -18,7 +18,7 @@
   ],
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
-  "memory": "512",
+  "memory": "1024",
   "executionRoleArn": "arn:aws:iam::216989107004:role/ecsTaskExecutionRole",
   "taskRoleArn": "arn:aws:iam::216989107004:role/ecs-role"
 }
