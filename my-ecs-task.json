@@ -1,13 +1,13 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:216989107004:task-definition/ecs-task:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:216989107004:task-definition/my-ecs-task:1",
     "containerDefinitions": [
         {
-            "name": "regapp1",
-            "image": "216989107004.dkr.ecr.ap-south-1.amazonaws.com/devops/ecs-project:latest",
+            "name": "ecsContainer",
+            "image": "216989107004.dkr.ecr.ap-southeast-1.amazonaws.com/myecr",
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "regapp1-80-tcp",
+                    "name": "ecscontainer-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
@@ -23,7 +23,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/ecs-task",
+                    "awslogs-group": "/ecs/my-ecs-task",
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
@@ -35,7 +35,7 @@
             "systemControls": []
         }
     ],
-    "family": "ecs-task",
+    "family": "my-ecs-task",
     "taskRoleArn": "arn:aws:iam::216989107004:role/ecs-role",
     "executionRoleArn": "arn:aws:iam::216989107004:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
@@ -88,7 +88,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-10-02T08:20:06.116Z",
+    "registeredAt": "2024-10-02T08:41:31.711Z",
     "registeredBy": "arn:aws:iam::216989107004:root",
     "tags": []
 }
