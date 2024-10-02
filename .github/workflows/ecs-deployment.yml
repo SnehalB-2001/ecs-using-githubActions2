@@ -18,7 +18,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-1
+          aws-region: ap-south-1
  
       - name: Install AWS CLI
         run: |
@@ -31,10 +31,10 @@ jobs:
  
       - name: create cluster.
         run: |
-          aws ecs create-cluster --cluster-name mycluster2
+          aws ecs create-cluster --cluster-name ecs-cluster
       - name: Create Task Definition
         run: |
-          aws ecs register-task-definition --cli-input-json file://task-def.json
+          aws ecs register-task-definition --cli-input-json file://task-definition.json
  
       - name: Build project with Maven
         run: mvn -B package --file pom.xml
@@ -47,7 +47,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: devops/project
+          ECR_REPOSITORY: devops/ecs-project
           IMAGE_TAG: "latest"
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -57,10 +57,10 @@ jobs:
  
       - name: Create ECS Service
         env:
-          AWS_REGION: ap-southeast-1
-          ECS_CLUSTER: mycluster2
-          ECS_SERVICE: new-service-latest
-          ECS_TASK_DEFINITION: mytask
+          AWS_REGION: ap-south-1
+          ECS_CLUSTER: ecs-cluster
+          ECS_SERVICE: my-service-latest
+          ECS_TASK_DEFINITION: mytask1
           COUNT: 1
           FARGATE: FARGATE
         run: |
@@ -70,4 +70,4 @@ jobs:
              --task-definition $ECS_TASK_DEFINITION \
              --desired-count $COUNT \
              --launch-type $FARGATE \
-             --network-configuration "awsvpcConfiguration={subnets=[subnet-035a592cfaf17819d],securityGroups=[sg-09bd524f4a39d18d0],assignPublicIp=ENABLED}"
+             --network-configuration "awsvpcConfiguration={subnets=[subnet-072dcc5c63e762a8b],securityGroups=[sg-0232993f822e152d4],assignPublicIp=ENABLED}"
