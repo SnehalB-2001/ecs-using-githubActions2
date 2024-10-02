@@ -37,14 +37,14 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build -t myecr .
-          docker push 216989107004.dkr.ecr.ap-southeast-1.amazonaws.com/myecr:latest
+          docker build -t devops/project .
+          docker push 216989107004.dkr.ecr.ap-southeast-1.amazonaws.com/devops/project:latest
           echo "image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT    
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: my-ecs-task.json
+          task-definition: ecs-task1.json
           container-name: ecsContainer
           image: ${{ steps.build-image.outputs.image }}    
       - name: Deploy Amazon ECS task definition
