@@ -24,14 +24,14 @@ jobs:
         run: |
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
-          sudo ./aws/install --update
+          sudo ./aws/install 
  
       - name: Verify AWS CLI Installation
         run: aws --version
  
       - name: create cluster.
         run: |
-          aws ecs create-cluster --cluster-name ecs-cluster
+          aws ecs create-cluster --cluster-name ecs-cluster1
       - name: Create Task Definition
         run: |
           aws ecs register-task-definition --cli-input-json file://task-definition.json
@@ -58,9 +58,9 @@ jobs:
       - name: Create ECS Service
         env:
           AWS_REGION: ap-south-1
-          ECS_CLUSTER: ecs-cluster
-          ECS_SERVICE: my-service-latest
-          ECS_TASK_DEFINITION: mytask1
+          ECS_CLUSTER: ecs-cluster1
+          ECS_SERVICE: my-service
+          ECS_TASK_DEFINITION: mytaskk
           COUNT: 1
           FARGATE: FARGATE
         run: |
