@@ -1,9 +1,9 @@
 {
-  "family": "task5",
+  "family": "task7",
   "networkMode": "awsvpc",
   "containerDefinitions": [
     {
-      "name": "mycontainer5",
+      "name": "mycontainer7",
       "image": "216989107004.dkr.ecr.ap-south-1.amazonaws.com/devops/ecs-project:latest",
       "essential": true,
       "memory": 1024,
