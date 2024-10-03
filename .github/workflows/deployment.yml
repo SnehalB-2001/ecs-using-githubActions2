@@ -64,10 +64,4 @@ jobs:
           COUNT: 1
           FARGATE: FARGATE
         run: |
-           aws ecs create-service \
-            --cluster $ECS_CLUSTER \
-             --service-name $ECS_SERVICE \
-             --task-definition $ECS_TASK_DEFINITION \
-             --desired-count $COUNT \
-             --launch-type $FARGATE \
-             --network-configuration "awsvpcConfiguration={subnets=[subnet-0a4ab2c9e4b671270],securityGroups=[sg-0164fa06ddfa29064],assignPublicIp=ENABLED}"
+         aws ecs update-service --cluster $ECS_CLUSTER --service
